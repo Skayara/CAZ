@@ -14,7 +14,7 @@ const Hero = () => {
     { label: "Años de Experiencia", value: "5+" },
     { label: "Proyectos Completados", value: "10+" },
     { label: "Tecnologías Dominadas", value: "20+" },
-    { label: "Certificaciones", value: "8" }
+    { label: "Certificaciones", value: "5" }
   ];
 
   return (
