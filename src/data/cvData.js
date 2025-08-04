@@ -1,9 +1,8 @@
 // Función helper para manejar las rutas de imágenes en GitHub Pages
 const getImagePath = (imageName) => {
-  // Detectar si estamos en dominio personalizado
-  const isCustomDomain = window.location.hostname === 'clara-contreras.online';
-  const baseUrl = process.env.NODE_ENV === 'production' && !isCustomDomain
-    ? '/CV_Clara_Contreras.github.io' 
+  // Para GitHub Pages con dominio personalizado, NO necesitamos ningún prefijo
+  const baseUrl = process.env.NODE_ENV === 'production' 
+    ? '' // CAMBIAR ESTO - quitar '/clara.contreras-online'
     : '';
   return `${baseUrl}/images/${imageName}`;
 };
