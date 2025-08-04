@@ -1,4 +1,8 @@
 {
+      "name": "cv-clara-contreras",
+      "version": "0.1.0",
+      "private": true,
+      "homepage": "https://clara-contreras.online",
       "scripts": {
             "start": "react-scripts start",
             "build": "react-scripts build",
