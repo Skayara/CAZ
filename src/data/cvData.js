@@ -1339,5 +1339,6 @@ export const toolsData = [
 export const idiomasData = [
   { name: "Español", level: 100, description: "Nativo" },
   { name: "Inglés", level: 80, description: "TOEIC 905/990 (B2 Avanzado)" },
-  { name: "Francés", level: 35, description: "Básico" }
+  { name: "Francés", level: 35, description: "Básico" },
+  { name: "Italiano", level: 35, description: "Básico" }
 ];
