@@ -1226,7 +1226,7 @@ export const interestsData = [
 
 
 export const skillsData = [
-  // Basado en \wheelchart
+  // Basado en \wheelchart - Áreas principales de ciberseguridad
   { name: "Pentesting", level: 17 },
   { name: "Respuesta ante incidentes", level: 10 },
   { name: "Programación", level: 15 },
@@ -1240,14 +1240,104 @@ export const skillsData = [
 ];
 
 export const languagesData = [
-  { name: "Español", level: 5 },
-  { name: "Inglés (TOEIC 905/990)", level: 4 }
+  { name: "Python", level: 90 },
+  { name: "C", level: 75 },
+  { name: "Java", level: 70 },
+  { name: "R", level: 65 },
+  { name: "JavaScript", level: 60 },
+  { name: "Bash/Shell", level: 85 },
+  { name: "SQL", level: 80 }
 ];
 
-export const certificationsData = [
-  { name: "Mentoring Disadvantaged Young People", issued: "Marzo 2024" },
-  { name: "Cyber Security Foundation Professional Certificate (CSFPC™)", issued: "Abril 2021" },
-  { name: "TOEIC 905/990 puntos (B2)", issued: "Junio 2021" },
-  { name: "NDG Linux Essentials", issued: "Septiembre 2021", issuer: "CISCO Networking Academy" },
-  { name: "Offensive Hacking Unfolded", issued: "Septiembre 2021" }
+export const toolsData = [
+  // Pentesting & Red Team
+  { 
+    category: "Pentesting & Red Team", 
+    tools: [
+      { name: "Metasploit", level: 85 },
+      { name: "Burp Suite", level: 90 },
+      { name: "Nmap", level: 95 },
+      { name: "Wireshark", level: 80 },
+      { name: "Kali Linux", level: 90 },
+      { name: "OWASP ZAP", level: 75 },
+      { name: "Nikto", level: 70 },
+      { name: "Gobuster", level: 80 }
+    ]
+  },
+  // OSINT & Ciberinteligencia
+  { 
+    category: "OSINT & Ciberinteligencia", 
+    tools: [
+      { name: "Maltego", level: 85 },
+      { name: "Shodan", level: 90 },
+      { name: "TheHarvester", level: 80 },
+      { name: "Recon-ng", level: 75 },
+      { name: "SpiderFoot", level: 70 },
+      { name: "MISP", level: 85 },
+      { name: "VirusTotal", level: 95 },
+      { name: "Google Dorking", level: 90 }
+    ]
+  },
+  // Análisis de Malware & Forense
+  { 
+    category: "Análisis de Malware & Forense", 
+    tools: [
+      { name: "IDA Pro", level: 65 },
+      { name: "Ghidra", level: 70 },
+      { name: "Volatility", level: 75 },
+      { name: "Autopsy", level: 80 },
+      { name: "YARA", level: 85 },
+      { name: "Cuckoo Sandbox", level: 70 },
+      { name: "OllyDbg", level: 60 },
+      { name: "Binwalk", level: 75 }
+    ]
+  },
+  // Infraestructura & Cloud Security
+  { 
+    category: "Infraestructura & Cloud", 
+    tools: [
+      { name: "Docker", level: 80 },
+      { name: "Kubernetes", level: 65 },
+      { name: "AWS Security", level: 70 },
+      { name: "Terraform", level: 60 },
+      { name: "Splunk", level: 75 },
+      { name: "ELK Stack", level: 70 },
+      { name: "Nagios", level: 65 },
+      { name: "Ansible", level: 55 }
+    ]
+  },
+  // Machine Learning & Data Science
+  { 
+    category: "ML & Data Science", 
+    tools: [
+      { name: "TensorFlow", level: 75 },
+      { name: "Scikit-learn", level: 85 },
+      { name: "Pandas", level: 90 },
+      { name: "NumPy", level: 85 },
+      { name: "Jupyter", level: 80 },
+      { name: "Matplotlib", level: 75 },
+      { name: "Keras", level: 70 },
+      { name: "PyTorch", level: 65 }
+    ]
+  },
+  // Compliance & Frameworks
+  { 
+    category: "Compliance & Frameworks", 
+    tools: [
+      { name: "NIST Framework", level: 85 },
+      { name: "IEC 62443", level: 80 },
+      { name: "ISO 27001", level: 75 },
+      { name: "GDPR", level: 90 },
+      { name: "OWASP", level: 85 },
+      { name: "MITRE ATT&CK", level: 80 },
+      { name: "CIS Controls", level: 70 },
+      { name: "DORA", level: 75 }
+    ]
+  }
+];
+
+export const idiomasData = [
+  { name: "Español", level: 100, description: "Nativo" },
+  { name: "Inglés", level: 80, description: "TOEIC 905/990 (B2 Avanzado)" },
+  { name: "Francés", level: 35, description: "Básico" }
 ];
