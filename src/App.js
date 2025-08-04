@@ -20,9 +20,41 @@ const App = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleSectionChange = (section) => {
-    setActiveSection(section);
+  // Scroll spy functionality
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['inicio', 'timeline', 'habilidades', 'contacto'];
+      const scrollPosition = window.scrollY + 100; // Offset for header
+      
+      let current = 'inicio';
+      
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const offsetTop = element.offsetTop;
+          const offsetHeight = element.offsetHeight;
+          
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            current = section;
+            break;
+          }
+        }
+      }
+      
+      setActiveSection(current);
+    };
+
+    // Add scroll listener
+    window.addEventListener('scroll', handleScroll);
     
+    // Call once to set initial state
+    handleScroll();
+    
+    // Cleanup
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleSectionChange = (section) => {
     // Smooth scroll to section
     const element = document.getElementById(section);
     if (element) {
