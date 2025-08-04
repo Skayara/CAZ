@@ -98,6 +98,10 @@ const Timeline = () => {
     setCurrentPage(prev => prev + 1);
   };
 
+  const showAll = () => {
+    setCurrentPage(Math.ceil(allFilteredData.length / ITEMS_PER_PAGE));
+  };
+
   const showLess = () => {
     setCurrentPage(1);
     // Scroll suave hacia arriba de la timeline
@@ -375,19 +379,33 @@ const Timeline = () => {
             {/* Load More / Show Less Buttons */}
             <div className="text-center mt-12 space-y-4">
               {hasMoreItems && (
-                <motion.button
-                  onClick={loadMore}
-                  className="px-8 py-4 rounded-xl font-semibold transition-all duration-300 flex items-center gap-3 mx-auto bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:shadow-lg"
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <MoreHorizontal className="w-5 h-5" />
-                  Ver más ({remainingItems > ITEMS_PER_PAGE ? ITEMS_PER_PAGE : remainingItems} de {remainingItems} restantes)
-                  <ChevronDown className="w-5 h-5" />
-                </motion.button>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                  <motion.button
+                    onClick={loadMore}
+                    className="px-8 py-4 rounded-xl font-semibold transition-all duration-300 flex items-center gap-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:shadow-lg"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <MoreHorizontal className="w-5 h-5" />
+                    Ver más ({remainingItems > ITEMS_PER_PAGE ? ITEMS_PER_PAGE : remainingItems} de {remainingItems} restantes)
+                    <ChevronDown className="w-5 h-5" />
+                  </motion.button>
+
+                  <motion.button
+                    onClick={showAll}
+                    className="px-6 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-green-600 text-white hover:shadow-lg"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                  >
+                    Mostrar todas ({allFilteredData.length})
+                  </motion.button>
+                </div>
               )}
 
               {currentPage > 1 && (
@@ -398,7 +416,7 @@ const Timeline = () => {
                   whileTap={{ scale: 0.95 }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.1 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
                 >
                   <ChevronUp className="w-4 h-4" />
                   Mostrar menos
