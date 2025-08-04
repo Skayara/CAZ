@@ -1229,12 +1229,12 @@ export const skillsData = [
   // Basado en \wheelchart - Áreas principales de ciberseguridad
   { name: "Pentesting", level: 17 },
   { name: "Respuesta ante incidentes", level: 10 },
-  { name: "Programación", level: 15 },
+  { name: "Programación", level: 10 },
   { name: "Compliance", level: 10 },
   { name: "Modelado de amenazas", level: 15 },
   { name: "Análisis estático", level: 5 },
   { name: "Ciberinteligencia", level: 10 },
-  { name: "Malware", level: 8 },
+  { name: "Malware", level: 13 },
   { name: "Forense", level: 8 },
   { name: "ML, IA, Data Science", level: 17 }
 ];
