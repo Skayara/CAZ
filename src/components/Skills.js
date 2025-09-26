@@ -13,7 +13,9 @@ const Skills = () => {
     'Análisis de Malware & Forense': Bug,
     'Infraestructura & Cloud': Cloud,
     'ML & Data Science': Brain,
-    'Compliance & Frameworks': FileText
+    'Compliance & Frameworks': FileText,
+    'OT/ICS & Ciberseguridad Industrial': Cloud,
+    'Hardware Hacking': Bug
   };
 
   const categoryColors = {
@@ -22,7 +24,9 @@ const Skills = () => {
     'Análisis de Malware & Forense': '#059669',
     'Infraestructura & Cloud': '#2563EB',
     'ML & Data Science': '#EA580C',
-    'Compliance & Frameworks': '#0891B2'
+    'Compliance & Frameworks': '#0891B2',
+    'OT/ICS & Ciberseguridad Industrial': '#F43F5E', // rosa fuerte
+    'Hardware Hacking': '#22D3EE' // cian claro
   };
 
   const languageColors = ['#3B82F6', '#10B981', '#F59E0B', '#8B5CF6', '#EF4444', '#06B6D4', '#84CC16'];

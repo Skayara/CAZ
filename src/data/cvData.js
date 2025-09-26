@@ -21,6 +21,32 @@ export const personalInfo = {
 };
 
 export const timelineData = [
+  // ...existing code...
+
+  {
+    id: 65,
+    year: 2025,
+    title: "ICS-211: Certified OT Security Technical Expert (COSTE)",
+    company: "Limes Security",
+  type: "certificacion",
+    description: `## ICS-211: Certified OT Security Technical Expert (COSTE) – Limes Security
+
+Certificación internacional obtenida tras superar el curso y examen oficial de Limes Security, centrado en la protección técnica de sistemas de control industrial (ICS/OT) y ciberseguridad avanzada en entornos industriales críticos.
+
+### Contenidos principales
+- Arquitectura y componentes de sistemas OT/ICS
+- Amenazas, vulnerabilidades y ataques en entornos industriales
+- Segmentación de redes y diseño seguro de infraestructuras OT
+- Gestión de incidentes y respuesta técnica en ICS
+- Prácticas avanzadas de hardening, monitoreo y defensa activa
+`,
+    achievements: [
+      "Protocolos de comunicación OT/ICS",
+      "Implementación de controles técnicos y defensa en profundidad en infraestructuras industriales",
+      "Resolución de laboratorios prácticos y casos reales de respuesta ante incidentes en OT"
+    ],
+    tags: ["ICS-211", "COSTE", "Limes Security", "OT", "ICS", "Ciberseguridad Industrial", "Certificaciones", "2025", "Finalizado"]
+  },
   // Experiencia laboral actual
   {
     id: 1,
@@ -931,7 +957,7 @@ Evento organizado íntegramente por estudiantes del Grado en Ingeniería de la C
   {
     id: 46,
     year: 2025,
-    title: "Ponencia sobre blindaje cibernético en despachos legales",
+    title: "Blindaje cibernético en despachos legales",
     company: "Tinku Legal",
     type: "ponencia",
     description: `## ¿Cómo blindar los despachos legales ante ciberataques?
@@ -1182,19 +1208,51 @@ Realización de prácticas docentes en 2025 en Salesianos Atocha como profesora 
       "Calificación final: 9,1 (SB)"
     ],
     tags: ["Docencia", "TFG", "Ciberseguridad", "URJC", "NIST", "Finalizado"]
+  },
+  {
+    id: 63,
+    year: 2025,
+    title: "Hardware Hacking",
+    company: "Hardware Hacking ES",
+    type: "certificacion",
+    description: `## Hardware Hacking Bootcamp Barcelona HwHckES
+
+### Resumen del Temario
+1. Soldadura y Desoldadura: SMD, THT
+2. Implantes USB: RP2040 + UART + PIO
+3. Reversing de firmware con Ghidra
+4. Car Hacking: CAN bus, OBD, ataques
+`,
+    achievements: [
+      "Desarrollo de habilidades prácticas en manipulación y análisis de hardware real",
+      "Resolución de retos de seguridad física y lógica",
+      "Aplicación de técnicas de análisis forense y reversing en dispositivos embebidos"
+    ],
+    tags: ["Hardware Hacking", "Bootcamp", "Soldadura", "Reversing", "Car Hacking", "RP2040", "Ghidra", "Certificaciones", "Finalizado"]
+  },
+  {
+    id: 64,
+    year: 2025,
+    title: "Hardware Hacking",
+    company: "Hardware Hacking ES",
+    type: "certificacion",
+    description: `## Curso Hardware Hacking / HwHckES-2025 (Madrid)
+
+### Resumen del Temario
+1. Soldadura y desoldadura THT/SMD, reballing BGA y control de calidad (IPC-610)
+2. Diseño y fabricación de PCB USB-UART multi-voltaje con EasyEDA
+3. Uso de Bus Pirate v6 y analizador lógico: I2C, SPI, SPI FLASH, I2C EEPROM y similares
+4. Implantes de teclado USB y PS2 en RP2040 con exfiltración por Wi-Fi
+5. Car hacking: análisis y ataques a CAN bus, interceptación y reinyección
+6. Reversing de firmware con Ghidra: extracción, particionado y parcheo
+7. Glitching, Side-Channel Attacks y BitLocker + DMA ofensiva con PCILeech
+`,
+    achievements: [
+      "Participación activa en laboratorio de ataques a hardware y buses de comunicación",
+      "Integración de herramientas para análisis y explotación de dispositivos"
+    ],
+    tags: ["Hardware Hacking", "Bootcamp", "PCB", "Soldadura", "Bus Pirate", "RP2040", "Car Hacking", "Ghidra", "Glitching", "PCILeech", "Certificaciones", "Finalizado"]
   }
-
-
-
-
-
-
-
-
-
-
-
-
 ];
 
 export const skillsDataBckp = [
@@ -1331,6 +1389,30 @@ export const toolsData = [
       { name: "MITRE ATT&CK", level: 80 },
       { name: "CIS Controls", level: 70 },
       { name: "DORA", level: 75 }
+    ]
+  },
+  // OT/ICS & Ciberseguridad Industrial
+  {
+    category: "OT/ICS & Ciberseguridad Industrial",
+    tools: [
+      { name: "Profinet/Profibus Analyzers", level: 55 },
+      { name: "Nozomi Networks Guardian", level: 60 },
+      { name: "Claroty", level: 55 },
+      { name: "Nessus/Greenbone para OT", level: 70 },
+      { name: "Modbus/TCP tools", level: 65 }
+    ]
+  },
+  // Hardware Hacking
+  {
+    category: "Hardware Hacking",
+    tools: [
+      { name: "Bus Pirate", level: 60 },
+      { name: "Logic Analyzer", level: 65 },
+      { name: "EasyEDA", level: 60 },
+      { name: "UART/SPI/I2C sniffers", level: 65 },
+      { name: "PCILeech", level: 50 },
+      { name: "Soldering/Rework Stations", level: 80 },
+      { name: "RP2040 tools", level: 60 }
     ]
   }
 ];

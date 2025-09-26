@@ -7,7 +7,7 @@ import { timelineData } from '../data/cvData';
 
 const Timeline = () => {
   const [expandedItem, setExpandedItem] = useState(null);
-  const [selectedType, setSelectedType] = useState('all');
+  const [selectedTypes, setSelectedTypes] = useState(['all']);
   const [currentPage, setCurrentPage] = useState(1);
 
   const typeConfig = {
@@ -43,38 +43,65 @@ const Timeline = () => {
       }))
   ];
 
-  // Filtrar y ordenar datos por año (más reciente primero)
+  // Nuevo handler para selección múltiple
+  const handleFilterChange = (typeKey) => {
+    if (typeKey === 'all') {
+      setSelectedTypes(['all']);
+      return;
+    }
+    setSelectedTypes(prev => {
+      let newTypes = [...prev];
+      // Si selecciona 'en-curso' o 'finalizado', deselecciona el otro si está
+      if (typeKey === 'en-curso') {
+        newTypes = newTypes.filter(t => t !== 'finalizado' && t !== 'all');
+        if (!prev.includes('en-curso')) newTypes.push('en-curso');
+        else newTypes = newTypes.filter(t => t !== 'en-curso');
+      } else if (typeKey === 'finalizado') {
+        newTypes = newTypes.filter(t => t !== 'en-curso' && t !== 'all');
+        if (!prev.includes('finalizado')) newTypes.push('finalizado');
+        else newTypes = newTypes.filter(t => t !== 'finalizado');
+      } else {
+        if (newTypes.includes(typeKey)) {
+          newTypes = newTypes.filter(t => t !== typeKey);
+        } else {
+          newTypes = newTypes.filter(t => t !== 'all');
+          newTypes.push(typeKey);
+        }
+      }
+      if (newTypes.length === 0) newTypes = ['all'];
+      return newTypes;
+    });
+  };
+
+  // Filtrado múltiple
+  // Filtrado especial para 'docencia': incluir también entradas con tag 'Docencia' aunque su type sea otro
   const allFilteredData = (
-    selectedType === 'all'
+    selectedTypes.includes('all')
       ? timelineData
-      : selectedType === 'en-curso'
-        ? timelineData.filter(item => item.tags && item.tags.includes('En curso'))
-      : selectedType === 'finalizado'
-        ? timelineData.filter(item => item.tags && item.tags.includes('Finalizado'))
-      : selectedType === 'docencia'
-        ? timelineData.filter(item => item.tags && item.tags.includes('Docencia'))
-      : selectedType === 'proyecto'
-        ? timelineData.filter(item => item.tags && item.tags.includes('Proyecto'))
-      : selectedType === 'ponencia'
-        ? timelineData.filter(item =>
-            (item.tags && item.tags.includes('Ponencia')) ||
-            item.type === 'ponencia'
-          )
-      : selectedType === 'tfg'
-        ? timelineData.filter(item =>
-            (item.tags && (
-              item.tags.includes('TFG') ||
-              item.tags.includes('tfg') ||
-              item.tags.includes('Tfg')
-            )) ||
-            item.type === 'tfg'
-          )
-      : selectedType === 'colaboracion_europea'
-        ? timelineData.filter(item =>
-            (item.tags && item.tags.includes('Europa')) ||
-            item.type === 'colaboracion_europea'
-          )
-      : timelineData.filter(item => item.type === selectedType)
+      : timelineData.filter(item => {
+          // Estado (AND): si hay alguno seleccionado, debe cumplirse
+          let estadoOk = true;
+          const estadosSeleccionados = selectedTypes.filter(t => t === 'en-curso' || t === 'finalizado');
+          if (estadosSeleccionados.length > 0) {
+            estadoOk = estadosSeleccionados.every(estado => {
+              if (estado === 'en-curso') return item.tags && item.tags.includes('En curso');
+              if (estado === 'finalizado') return item.tags && item.tags.includes('Finalizado');
+              return true;
+            });
+          }
+          // Tipos (OR): si hay alguno seleccionado, basta con que cumpla uno
+          const tiposSeleccionados = selectedTypes.filter(t => !['all','en-curso','finalizado','separator-estado','separator-tipo'].includes(t));
+          let tipoOk = true;
+          if (tiposSeleccionados.length > 0) {
+            tipoOk = tiposSeleccionados.some(type => {
+              if (type === 'docencia') {
+                return item.type === 'docencia' || (item.tags && item.tags.includes('Docencia'));
+              }
+              return item.type === type || (item.tags || []).includes(type);
+            });
+          }
+          return estadoOk && tipoOk;
+        })
   ).sort((a, b) => b.year - a.year); // Ordenar por año descendente
 
   // Paginación progresiva
@@ -86,12 +113,6 @@ const Timeline = () => {
 
   const toggleExpanded = (id) => {
     setExpandedItem(expandedItem === id ? null : id);
-  };
-
-  const handleFilterChange = (newType) => {
-    setSelectedType(newType);
-    setCurrentPage(1); // Reset página cuando cambia el filtro
-    setExpandedItem(null); // Cerrar cualquier item expandido
   };
 
   const loadMore = () => {
@@ -158,7 +179,7 @@ const Timeline = () => {
                 onClick={() => !type.disabled && handleFilterChange(type.key)}
                 disabled={type.disabled}
                 className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center gap-2 ${
-                  selectedType === type.key
+                  selectedTypes.includes(type.key)
                     ? 'bg-blue-500 text-white shadow-lg'
                     : 'bg-white text-gray-600 hover:bg-blue-50 hover:text-blue-500 border border-gray-200'
                 } ${type.disabled ? 'cursor-not-allowed opacity-50' : ''}`}
@@ -185,9 +206,9 @@ const Timeline = () => {
           <p className="text-gray-600">
             Mostrando <span className="font-semibold text-blue-600">{filteredData.length}</span> de{' '}
             <span className="font-semibold text-gray-900">{allFilteredData.length}</span> entradas
-            {selectedType !== 'all' && (
+            {selectedTypes.length === 1 && selectedTypes[0] !== 'all' && (
               <span className="ml-2 px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">
-                {filterTypes.find(f => f.key === selectedType)?.label}
+                {filterTypes.find(f => f.key === selectedTypes[0])?.label}
               </span>
             )}
           </p>
@@ -204,13 +225,13 @@ const Timeline = () => {
                 const config = typeConfig[item.type] || { color: 'from-gray-400 to-gray-500', bg: 'bg-gray-50', text: 'text-gray-700', label: 'Desconocido' };
                 
                 // Configuración especial para items con tags específicas
-                if (selectedType === 'docencia' && item.tags && item.tags.includes('Docencia')) {
+                if (selectedTypes.includes('docencia') && item.tags && item.tags.includes('Docencia')) {
                   Object.assign(config, typeConfig.docencia);
                 }
-                if (selectedType === 'ponencia' && item.tags && item.tags.includes('Ponencia')) {
+                if (selectedTypes.includes('ponencia') && item.tags && item.tags.includes('Ponencia')) {
                   Object.assign(config, typeConfig.ponencia);
                 }
-                if (selectedType === 'tfg' && item.tags && (
+                if (selectedTypes.includes('tfg') && item.tags && (
                   item.tags.includes('TFG') ||
                   item.tags.includes('tfg') ||
                   item.tags.includes('Tfg')
