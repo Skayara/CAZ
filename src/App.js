@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import Timeline from './components/Timeline';
-import Skills from './components/Skills';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
+import SongRepertoire from './components/SongRepertoire';
+import SimpleTransposeTest from './components/SimpleTransposeTest';
 
 const App = () => {
   const [activeSection, setActiveSection] = useState('inicio');
@@ -23,7 +21,7 @@ const App = () => {
   // Scroll spy functionality
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['inicio', 'timeline', 'habilidades', 'contacto'];
+      const sections = ['inicio', 'repertorio'];
       const scrollPosition = window.scrollY + 100; // Offset for header
       
       let current = 'inicio';
@@ -88,9 +86,9 @@ const App = () => {
             transition={{ delay: 0.3, duration: 0.6 }}
           >
             <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Cargando Portfolio
+              Cargando Repertorio
             </h1>
-            <p className="text-gray-600">Preparando una experiencia increíble...</p>
+            <p className="text-gray-600">Preparando el repertorio musical...</p>
           </motion.div>
 
           <motion.div
@@ -138,21 +136,15 @@ const App = () => {
             <Hero />
           </section>
 
-          <section id="timeline">
-            <Timeline />
+          <section id="repertorio">
+            <SongRepertoire />
           </section>
-
-          <section id="habilidades">
-            <Skills />
-          </section>
-
-          <section id="contacto">
-            <Contact />
+          
+          <section>
+            <SimpleTransposeTest />
           </section>
         </motion.div>
       </main>
-
-      <Footer />
 
       {/* Scroll to Top Button */}
       <motion.button

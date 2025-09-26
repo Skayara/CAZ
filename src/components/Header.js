@@ -1,24 +1,13 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Menu, X, Mail, Phone, MapPin, Github, Linkedin, Globe } from 'lucide-react';
-import { personalInfo } from '../data/cvData';
+import { Menu, X } from 'lucide-react';
 
 const Header = ({ activeSection, onSectionChange }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
     { id: 'inicio', label: 'Inicio' },
-    { id: 'timeline', label: 'Mi Trayectoria' },
-    { id: 'habilidades', label: 'Habilidades' },
-    { id: 'contacto', label: 'Contacto' }
-  ];
-
-  const contactInfo = [
-    { icon: Mail, value: personalInfo.email, href: `mailto:${personalInfo.email}` },
-    { icon: MapPin, value: personalInfo.location },
-    { icon: Github, value: personalInfo.github, href: `https://${personalInfo.github}` },
-    { icon: Linkedin, value: personalInfo.linkedin, href: `https://${personalInfo.linkedin}` },
-    { icon: Globe, value: personalInfo.website, href: `https://${personalInfo.website}` }
+    { id: 'repertorio', label: 'Repertorio' }
   ];
 
   return (
@@ -34,15 +23,9 @@ const Header = ({ activeSection, onSectionChange }) => {
             className="flex items-center gap-4"
             whileHover={{ scale: 1.05 }}
           >
-            <motion.img
-              src={personalInfo.avatar}
-              alt={personalInfo.name}
-              className="w-10 h-10 rounded-full border-2 border-blue-500/20"
-              whileHover={{ scale: 1.1, rotate: 5 }}
-            />
             <div>
-              <h1 className="text-lg font-bold text-gray-900">{personalInfo.name}</h1>
-              <p className="text-sm text-gray-600">{personalInfo.title}</p>
+              <h1 className="text-lg font-bold text-gray-900">CAZ Atocha</h1>
+              <p className="text-sm text-gray-600">Repertorio Musical</p>
             </div>
           </motion.div>
 
@@ -106,25 +89,6 @@ const Header = ({ activeSection, onSectionChange }) => {
                 {item.label}
               </motion.button>
             ))}
-            
-            <div className="pt-4 border-t border-gray-200">
-              <div className="grid grid-cols-2 gap-2">
-                {contactInfo.map((contact, index) => {
-                  const Icon = contact.icon;
-                  return (
-                    <motion.a
-                      key={index}
-                      href={contact.href}
-                      className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-100 text-sm text-gray-600"
-                      whileHover={{ scale: 1.05 }}
-                    >
-                      <Icon className="w-4 h-4" />
-                      <span className="truncate">{contact.value}</span>
-                    </motion.a>
-                  );
-                })}
-              </div>
-            </div>
           </div>
         </motion.div>
       </div>
