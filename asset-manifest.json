@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/CAZ.github.io/static/css/main.af4e3918.css",
+    "main.js": "/CAZ.github.io/static/js/main.e6dac2d4.js",
+    "index.html": "/CAZ.github.io/index.html",
+    "main.af4e3918.css.map": "/CAZ.github.io/static/css/main.af4e3918.css.map",
+    "main.e6dac2d4.js.map": "/CAZ.github.io/static/js/main.e6dac2d4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.af4e3918.css",
+    "static/js/main.e6dac2d4.js"
+  ]
+}
