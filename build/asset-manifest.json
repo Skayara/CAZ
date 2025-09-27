@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/static/css/main.fe42c4fd.css",
-    "main.js": "/static/js/main.78db6afd.js",
-    "index.html": "/index.html",
-    "main.fe42c4fd.css.map": "/static/css/main.fe42c4fd.css.map",
-    "main.78db6afd.js.map": "/static/js/main.78db6afd.js.map"
+    "main.css": "/CAZ.github.io/static/css/main.af4e3918.css",
+    "main.js": "/CAZ.github.io/static/js/main.e6dac2d4.js",
+    "index.html": "/CAZ.github.io/index.html",
+    "main.af4e3918.css.map": "/CAZ.github.io/static/css/main.af4e3918.css.map",
+    "main.e6dac2d4.js.map": "/CAZ.github.io/static/js/main.e6dac2d4.js.map"
   },
   "entrypoints": [
-    "static/css/main.fe42c4fd.css",
-    "static/js/main.78db6afd.js"
+    "static/css/main.af4e3918.css",
+    "static/js/main.e6dac2d4.js"
   ]
 }
