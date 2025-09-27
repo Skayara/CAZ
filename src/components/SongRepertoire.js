@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Music, ChevronDown, ChevronUp, Plus, Minus } from 'lucide-react';
-import { songsData, songCategories, transposeLyrics } from '../data/songsData';
+import { songsData, songCategories, transposeChord } from '../data/songsData';
 
 const SongRepertoire = () => {
   const [expandedSong, setExpandedSong] = useState(null);
@@ -88,47 +88,62 @@ const SongRepertoire = () => {
   };
 
   const formatLyrics = (lyrics, transposition = 0) => {
-    const transposedLyrics = transposeLyrics(lyrics, transposition);
+    // Super simple approach: just transpose chord-like patterns and preserve everything else
+    let processedLyrics = lyrics;
     
-    // Split lyrics into lines and format chords
-    return transposedLyrics.split('\n').map((line, index) => {
-      // Improved detection: check if line contains mainly chords
-      const words = line.trim().split(/\s+/);
-      const chordWords = words.filter(word => {
-        // Check if word looks like a chord
-        return /^[A-Z][#b]?(?:add\d+|sus\d+|maj\d+|m\d*|dim|\d+)*$/.test(word) ||
-               /^[a-z][#b]?[a-z]*\d*$/.test(word);
-      });
+    // If there's a transposition, replace known chord patterns
+    if (transposition !== 0) {
+      // List of all possible chord patterns we want to transpose
+      const chordPatterns = [
+        // Major chords
+        /\bDO#?\b/g, /\bRE#?\b/g, /\bMI\b/g, /\bFA#?\b/g, /\bSOL#?\b/g, /\bLA#?\b/g, /\bSI\b/g,
+        // Minor chords (lowercase)
+        /\bdo#?\b/g, /\bre#?\b/g, /\bmi\b/g, /\bfa#?\b/g, /\bsol#?\b/g, /\bla#?\b/g, /\bsi\b/g,
+        // Minor chords with m
+        /\bDO#?m\b/g, /\bRE#?m\b/g, /\bMIm\b/g, /\bFA#?m\b/g, /\bSOL#?m\b/g, /\bLA#?m\b/g, /\bSIm\b/g,
+        /\bdom\b/g, /\brem\b/g, /\bmim\b/g, /\bfam\b/g, /\bsolm\b/g, /\blam\b/g, /\bsim\b/g,
+        // 7th chords
+        /\bDO#?7\b/g, /\bRE#?7\b/g, /\bMI7\b/g, /\bFA#?7\b/g, /\bSOL#?7\b/g, /\bLA#?7\b/g, /\bSI7\b/g,
+        // Add9, sus, etc.
+        /\bDO#?add9\b/g, /\bRE#?add9\b/g, /\bMIadd9\b/g, /\bFA#?add9\b/g, /\bSOL#?add9\b/g, /\bLA#?add9\b/g, /\bSIadd9\b/g
+      ];
       
-      // If more than 50% of words are chords, treat as chord line
-      const isChordLine = words.length > 0 && (chordWords.length / words.length) > 0.5;
+      // Simple replacement: find any chord and transpose it
+      processedLyrics = lyrics.replace(
+        /\b(DO#?|RE#?|MI|FA#?|SOL#?|LA#?|SI|do#?|re#?|mi|fa#?|sol#?|la#?|si)([m]?[0-9]*|add[0-9]+|sus[0-9]*|maj[0-9]*|dim)?\b/g,
+        (match) => {
+          return transposeChord(match, transposition);
+        }
+      );
+    }
+    
+    // Split lyrics into lines and format
+    return processedLyrics.split('\n').map((line, index) => {
+      // Simple detection: if line starts with chord-like patterns, it's probably a chord line
+      const trimmedLine = line.trim();
+      const startsWithChord = /^(DO#?|RE#?|MI|FA#?|SOL#?|LA#?|SI|do#?|re#?|mi|fa#?|sol#?|la#?|si)/i.test(trimmedLine);
+      const hasMultipleChords = (trimmedLine.match(/\b(DO#?|RE#?|MI|FA#?|SOL#?|LA#?|SI|do#?|re#?|mi|fa#?|sol#?|la#?|si)/gi) || []).length >= 2;
+      const isChordLine = startsWithChord || hasMultipleChords;
       
       if (isChordLine) {
-        // This is a chord line, format it differently
         return (
-          <div key={index} className="text-blue-600 font-bold mb-1 font-mono text-sm leading-relaxed">
+          <div key={index} className="text-blue-600 font-bold mb-1 font-mono text-sm leading-relaxed whitespace-pre">
             {line}
           </div>
         );
       } else {
-        // This is a lyrics line - might still contain some chords mixed in
-        // Let's highlight any chords within the text
+        // This is a lyrics line - highlight any chords within the text
         const formattedLine = line.replace(
-          /\b([A-Z][#b]?(?:add\d+|sus\d+|maj\d+|m\d*|dim|\d+)*|[a-z][#b]?[a-z]*\d*)\b/g,
+          /\b(DO#?|RE#?|MI|FA#?|SOL#?|LA#?|SI|do#?|re#?|mi|fa#?|sol#?|la#?|si)([m]?[0-9]*|add[0-9]+|sus[0-9]*|maj[0-9]*|dim)?\b/g,
           (match) => {
-            // Check if it's likely a chord
-            if (/^[A-Z][#b]?(?:add\d+|sus\d+|maj\d+|m\d*|dim|\d+)*$/.test(match) ||
-                /^[a-z][#b]?[a-z]*\d*$/.test(match)) {
-              return `<span class="text-blue-600 font-semibold">${match}</span>`;
-            }
-            return match;
+            return `<span class="text-blue-600 font-semibold">${match}</span>`;
           }
         );
         
         return (
           <div 
             key={index} 
-            className="text-gray-700 mb-1 leading-relaxed"
+            className="text-gray-700 mb-1 leading-relaxed whitespace-pre"
             dangerouslySetInnerHTML={{ __html: formattedLine || '&nbsp;' }}
           />
         );

@@ -2,146 +2,223 @@
 export const songsData = [
   {
     id: 1,
-    title: "TAN SÓLO HE VENIDO",
-    category: "himno",
-    key: "SOL",
-    lyrics: `SOL        RE     DOadd9   SOL RE    DO
-No he venido a pedirte como suelo,
+    title: "ENCIENDEME",
+    category: "entrada",
+    key: "MI",
+    lyrics: `MI                 LA
+Hoy quiero, Señor, ponerlo todo en tu presencia,
+DO#m                 SI
+Darme hasta gastarme contigo y por Ti.
+MI                 LA
+Hoy quiero, Señor, ponerlo todo ante tu puerta
+MI
+para en todo amarte y servir.
 
-RE    DOadd9    mim7      RE
-si antes de yo clamarte conoces mi petición
-
-SOL    RE   DOadd9    SOL RE   DO
-Solo quiero escucharte pon el lema,
-
-SOL     RE    DOadd9   mim7      RE
-caminar de tu mano y decirte una canción
-
-SOL      RE        mi
-TAN SÓLO HE VENIDO A ESTAR CONTIGO
-
-RE    DO         lam         RE
-A SER TU AMIGO A COMPARTIR CON MI DIOS,
-
-SOL        RE     mi      RE      DO
-ADORARTE Y DARTE GRACIAS POR SIEMPRE SIN PREGUNTAR NADA
-
-lam        RE      SOL
-POR LO QUE HAS HECHO, CONMIGO A ORAR
-
-SOL      RE     DOadd9  SOL RE  DO
-2 Cuéntame de tus obras que hay de nuevo
-
-RE     DOadd9  mim7 RE   DO
-Y de paso pregunto ¿qué puedo hacer yo?
-
-SOL     RE     DOadd9    SOL RE  DO
-Y yo, solo quiero abrazarte bendecirte mi Dios
-
-SOL    RE    DOadd9  mim7     RE
-caminar por las calles y abrirte mi corazón`,
-    chords: ["SOL", "RE", "DOadd9", "mim7", "DO", "mi", "lam"]
+MI            LA
+Enciéndeme y déjame arder donde haga falta,
+MI            LA
+Enciéndeme y déjame ser tu luz,
+MI            LA
+y así poder llevarte hasta todas las almas,
+MI     SI       MI
+saciar la sed que tienes Tú desde la cruz.`,
+    chords: ["MI","LA","DO#m","SI"]
   },
   {
     id: 2,
-    title: "COMO LLUVIA",
-    category: "adoracion",
-    key: "DO",
-    lyrics: `DO      FA     SOL     DO
-Como lluvia en el desierto
-
-FA       SOL      lam
-Así es tu amor en mi
-
-DO      FA     SOL     DO
-Como río en tierra seca
-
-FA       SOL      DO
-Así eres tú para mí`,
-    chords: ["DO", "FA", "SOL", "lam"]
+    title: "GEN VERDE",
+    category: "gloria",
+    key: "RE",
+    lyrics: `RE   SOL   sim   LA
+Gloria, gloria a Diooos.
+RE   SOL   sim   LA
+Gloria, gloria a Dios en el cieeelo.
+RE   SOL   sim   LA
+Paz en la tierra a la gente
+DO  SOL  RE  SOL  RE
+de buena voluntad, ¡gloooria!`,
+    chords: ["RE","SOL","sim","LA","DO"]
   },
   {
     id: 3,
-    title: "DIGNO ES EL CORDERO",
-    category: "alabanza",
-    key: "LA",
-    lyrics: `LA        MI      RE        LA
-Digno es el Cordero que fue inmolado
+    title: "EL SEÑOR ES MI PASTOR",
+    category: "salmo",
+    key: "DO",
+    lyrics: `DO     SOL      la
+El Señor es mi Pastor,
+FA        re     SOL
+nada me falta, nada me falta. (bis)
 
-MI        RE        LA
-De recibir el poder
-
-LA        MI      RE        LA
-Y las riquezas y la sabiduría
-
-MI        RE        LA
-Y la fortaleza y honor`,
-    chords: ["LA", "MI", "RE"]
+FA     SOL        la
+Me lleva a descansar en verdes prados,
+FA        SOL        DO
+me conduce a las aguas refrescantes...
+FA     SOL     MI    la
+Reconforta mi alma y me conduce por sus caminos.`,
+    chords: ["DO","SOL","la","FA","re","MI"]
   },
   {
     id: 4,
-    title: "BENDITO SEA EL SEÑOR",
-    category: "alabanza",
-    key: "RE",
-    lyrics: `RE        LA        SOL      RE
-Bendito sea el Señor Dios de Israel
+    title: "ALELUYA",
+    category: "aleluya",
+    key: "SOL",
+    lyrics: `SOL  DO   SOL   RE
+Aleluya, aleluya, el Señor resucitó.
+SOL  DO   SOL  RE7  SOL
+Aleluya, aleluya, aleluya, ¡resucitó!
 
-LA        SOL        RE
-Que vive y reina con poder
-
-RE        LA        SOL      RE
-Bendito sea por siempre su nombre
-
-LA        SOL        RE
-Su gloria llene toda la tierra`,
-    chords: ["RE", "LA", "SOL"]
+DO
+¿Por qué buscáis entre los muertos al que vive?
+SOL                 RE
+¿Por qué buscáis fuera de Él?
+SOL7      DO     DO
+Si Él está vivo: ¡resucitó!`,
+    chords: ["SOL","DO","RE","RE7","DO7"]
   },
   {
     id: 5,
-    title: "SANTO ESPÍRITU VEN",
-    category: "adoracion",
+    title: "Y QUE MÁS QUIERES",
+    category: "otros",
     key: "SOL",
-    lyrics: `SOL       RE        mim      DOadd9
-Santo Espíritu ven, llena este lugar
+    lyrics: `SOL
+¿Y qué más quieres que alumbrar?
+DO
+¿Y qué más quieres que dar vida?
+RE
+¿Qué más quieres que crear algo
+DO          SOL
+que en ti está como semilla?
 
-SOL       RE        DOadd9
-Santo Espíritu ven, como tú sabes llegar
-
-SOL       RE        mim      DOadd9
-Muévete en mí, transforma mi ser
-
-SOL       RE        DOadd9     SOL
-Santo Espíritu ven, Santo Espíritu ven`,
-    chords: ["SOL", "RE", "mim", "DOadd9"]
+mim                 sim
+Si te arriesgas a expresar lo que tus ojos descubren,
+DO   RE     mim
+podrán todos contemplar las aguas que de ti fluyen...`,
+    chords: ["SOL","DO","RE","mim","sim"]
   },
   {
     id: 6,
-    title: "JEHOVÁ ES MI PASTOR",
-    category: "himno",
+    title: "TE OFRECEMOS",
+    category: "ofertorio",
+    key: "DO",
+    lyrics: `DO      FA       DO
+Te ofrecemos pan y vino,
+FA                 DO
+te ofrecemos nuestro ser,
+FA           DO
+pan para andar el camino,
+SIB     SOL
+vino que apaga la sed.
+
+FA      DO
+Te ofrecemos pan y vino
+FA   SOL   LAm
+que ahora se transformarán
+FA      DO
+en Cuerpo y Sangre de Cristo,
+SIB     SOL
+nueva vida nos darán.`,
+    chords: ["DO","FA","SOL","SIB","LAm"]
+  },
+  {
+    id: 7,
+    title: "SANTO",
+    category: "santo",
+    key: "SOL",
+    lyrics: `SOL  DO  RE     SOL  DO  RE
+Santo es el Señor, santo es el Señor. (bis)
+
+SOL
+Los cielos y la tierra
+mi
+proclaman tu grandeza,
+DO     RE
+¡hosanna, hosanna! (bis)
+
+SOL
+Bendito el que viene
+mi
+por siempre en tu nombre,
+DO     RE
+¡hosanna, hosanna!`,
+    chords: ["SOL","DO","RE","mi"]
+  },
+  {
+    id: 8,
+    title: "PAZ SALERO",
+    category: "paz",
+    key: "RE",
+    lyrics: `RE-SOL / RE-LA
+Paz, ¡oh, paz!
+Dale a mi vida tu luz.
+Paz, ¡oh, paz!
+Dale a mi vida tu luz.
+
+RE
+Ponle a mi vida tu ¡salero!
+SOL          RE
+Tus palabritas de amor sincero,
+LA
+la paz sea contigo, hermano.
+RE                 SOL
+Regalo trozos de cielo. (cierre: RE–al aire–LA–RE)`,
+    chords: ["RE","SOL","LA"]
+  },
+  {
+    id: 9,
+    title: "COSAS DE LOCOS",
+    category: "comunion",
     key: "MI",
-    lyrics: `MI        SI        DO#m     LA
-Jehová es mi pastor, nada me faltará
+    lyrics: `MI        sol#       LA
+Si pienso lo que quieres que yo haga,
+MI        sol#       LA
+si tengo que hacer caso a tus palabras...
+fa#            SI7
+es como si me vaciaras las venas,
+LA                 MI
+estás loco, estás loco.
 
-MI        SI        LA
-En lugares de delicados pastos
+LA     SI7      MI
+Solo te pido fuerzas para hacer
+LA     SI7      MI
+de mi debilidad un férreo vendaval...`,
+    chords: ["MI","LA","SI7","fa#","sol#"]
+  },
+  {
+    id: 10,
+    title: "EN MI GETSEMANÍ",
+    category: "comunion",
+    key: "DO",
+    lyrics: `DO   SOL   LAm
+Para que mi amor no sea un sentimiento,
+FA     REm   SOL
+tan solo un deslumbramiento pasajero.
+MI          LAm
+Quiero hundir más hondo mi raíz en ti
+FA     REm   SOL
+y cimentar en solidez este mi afecto.
 
-MI        SI        DO#m     LA
-me hará descansar, junto a aguas de reposo
-
-MI        SI        LA        MI
-me pastoreará, mi alma restaurará`,
-    chords: ["MI", "SI", "DO#m", "LA"]
+(Coro)
+DO      SOL
+Más allá de mis miedos,
+LAm   MIm  FA
+más allá de mi inseguridad,
+REm              SOL
+quiero darte mi respuesta.`,
+    chords: ["DO","SOL","LAm","FA","REm","MI","MIm"]
   }
 ];
 
 export const songCategories = [
   { key: 'all', label: 'Todas', count: 0 },
-  { key: 'himno', label: 'Himnos', count: 0 },
-  { key: 'adoracion', label: 'Adoración', count: 0 },
-  { key: 'alabanza', label: 'Alabanza', count: 0 },
-  { key: 'communion', label: 'Comunión', count: 0 },
-  { key: 'navidad', label: 'Navidad', count: 0 },
-  { key: 'pascua', label: 'Pascua', count: 0 }
+  { key: 'entrada', label: 'Entrada', count: 0 },
+  { key: 'gloria', label: 'Gloria', count: 0 },
+  { key: 'salmo', label: 'Salmos', count: 0 },
+  { key: 'aleluya', label: 'Aleluya', count: 0 },
+  { key: 'ofertorio', label: 'Ofertorio', count: 0 },
+  { key: 'santo', label: 'Santo', count: 0 },
+  { key: 'paz', label: 'Paz', count: 0 },
+  { key: 'comunion', label: 'Comunión', count: 0 },
+  { key: 'otros', label: 'Otros', count: 0 }
 ];
 
 // Chord transposition mappings
