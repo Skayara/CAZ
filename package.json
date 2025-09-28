@@ -2,7 +2,7 @@
       "name": "caz",
       "version": "0.1.0",
       "private": true,
-      "homepage": "https://skayara.github.io/CAZ.github.io",
+      "homepage": "https://skayara.github.io/CAZ",
       "scripts": {
             "start": "react-scripts start",
             "build": "react-scripts build",

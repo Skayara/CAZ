@@ -35,7 +35,7 @@ jobs:
     - name: Build
       run: npm run build
       env:
-        PUBLIC_URL: /CAZ.github.io
+        PUBLIC_URL: /CAZ
 
     - name: Setup Pages
       uses: actions/configure-pages@v4
