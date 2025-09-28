@@ -88,29 +88,31 @@ const SongRepertoire = () => {
   };
 
   const formatLyrics = (lyrics, transposition = 0) => {
-    // Super simple approach: just transpose chord-like patterns and preserve everything else
+    // More precise chord detection and transposition
     let processedLyrics = lyrics;
     
-    // If there's a transposition, replace known chord patterns
+    // If there's a transposition, replace only legitimate chord patterns
     if (transposition !== 0) {
-      // List of all possible chord patterns we want to transpose
-      const chordPatterns = [
-        // Major chords
-        /\bDO#?\b/g, /\bRE#?\b/g, /\bMI\b/g, /\bFA#?\b/g, /\bSOL#?\b/g, /\bLA#?\b/g, /\bSI\b/g,
-        // Minor chords (lowercase)
-        /\bdo#?\b/g, /\bre#?\b/g, /\bmi\b/g, /\bfa#?\b/g, /\bsol#?\b/g, /\bla#?\b/g, /\bsi\b/g,
-        // Minor chords with m
-        /\bDO#?m\b/g, /\bRE#?m\b/g, /\bMIm\b/g, /\bFA#?m\b/g, /\bSOL#?m\b/g, /\bLA#?m\b/g, /\bSIm\b/g,
-        /\bdom\b/g, /\brem\b/g, /\bmim\b/g, /\bfam\b/g, /\bsolm\b/g, /\blam\b/g, /\bsim\b/g,
-        // 7th chords
-        /\bDO#?7\b/g, /\bRE#?7\b/g, /\bMI7\b/g, /\bFA#?7\b/g, /\bSOL#?7\b/g, /\bLA#?7\b/g, /\bSI7\b/g,
-        // Add9, sus, etc.
-        /\bDO#?add9\b/g, /\bRE#?add9\b/g, /\bMIadd9\b/g, /\bFA#?add9\b/g, /\bSOL#?add9\b/g, /\bLA#?add9\b/g, /\bSIadd9\b/g
-      ];
-      
-      // Simple replacement: find any chord and transpose it
+      // More precise regex that includes common chord extensions
       processedLyrics = lyrics.replace(
-        /\b(DO#?|RE#?|MI|FA#?|SOL#?|LA#?|SI|do#?|re#?|mi|fa#?|sol#?|la#?|si)([m]?[0-9]*|add[0-9]+|sus[0-9]*|maj[0-9]*|dim)?\b/g,
+        /\b(DO#?|RE#?|MI|FA#?|SOL#?|LA#?|SI)([m]?[0-9]*|add[0-9]+|sus[0-9]*|maj[0-9]*|dim|M)?([0-9]*)\b/g,
+        (match) => {
+          // Only transpose if it looks like a legitimate chord
+          return transposeChord(match, transposition);
+        }
+      );
+      
+      // Handle lowercase minor chords more carefully (only when they have suffixes or are isolated)
+      processedLyrics = processedLyrics.replace(
+        /\b(do#?|re#?|fa#?|sol#?|la#?|si)([m]?[0-9]+|add[0-9]+|sus[0-9]*|maj[0-9]*|dim)\b/g,
+        (match) => {
+          return transposeChord(match, transposition);
+        }
+      );
+      
+      // Handle "mi" and standalone lowercase chords only in chord contexts
+      processedLyrics = processedLyrics.replace(
+        /\b(mim|sim|rem|lam|dom|fam|solm)\b/g,
         (match) => {
           return transposeChord(match, transposition);
         }
@@ -119,11 +121,24 @@ const SongRepertoire = () => {
     
     // Split lyrics into lines and format
     return processedLyrics.split('\n').map((line, index) => {
-      // Simple detection: if line starts with chord-like patterns, it's probably a chord line
+      // More precise chord line detection
       const trimmedLine = line.trim();
-      const startsWithChord = /^(DO#?|RE#?|MI|FA#?|SOL#?|LA#?|SI|do#?|re#?|mi|fa#?|sol#?|la#?|si)/i.test(trimmedLine);
-      const hasMultipleChords = (trimmedLine.match(/\b(DO#?|RE#?|MI|FA#?|SOL#?|LA#?|SI|do#?|re#?|mi|fa#?|sol#?|la#?|si)/gi) || []).length >= 2;
-      const isChordLine = startsWithChord || hasMultipleChords;
+      
+      // Count legitimate chord patterns in the line
+      const chordMatches = trimmedLine.match(/\b(DO#?|RE#?|MI|FA#?|SOL#?|LA#?|SI)([m]?[0-9]*|add[0-9]+|sus[0-9]*|maj[0-9]*|dim|M)?([0-9]*)\b/g) || [];
+      const minorChordMatches = trimmedLine.match(/\b(mim|sim|rem|lam|dom|fam|solm)\b/g) || [];
+      const totalChords = chordMatches.length + minorChordMatches.length;
+      
+      // Check if the line is mostly spaces and chords (typical chord line pattern)
+      const words = trimmedLine.split(/\s+/).filter(word => word.length > 0);
+      const chordRatio = words.length > 0 ? totalChords / words.length : 0;
+      
+      // A line is considered a chord line if:
+      // 1. It starts with a chord, OR
+      // 2. More than 50% of words are chords, OR
+      // 3. It has 2+ chords and less than 5 total words
+      const startsWithChord = /^(DO#?|RE#?|MI|FA#?|SOL#?|LA#?|SI|mim|sim|rem|lam|dom|fam|solm)\b/i.test(trimmedLine);
+      const isChordLine = startsWithChord || chordRatio > 0.5 || (totalChords >= 2 && words.length <= 5);
       
       if (isChordLine) {
         return (
@@ -132,9 +147,20 @@ const SongRepertoire = () => {
           </div>
         );
       } else {
-        // This is a lyrics line - highlight any chords within the text
-        const formattedLine = line.replace(
-          /\b(DO#?|RE#?|MI|FA#?|SOL#?|LA#?|SI|do#?|re#?|mi|fa#?|sol#?|la#?|si)([m]?[0-9]*|add[0-9]+|sus[0-9]*|maj[0-9]*|dim)?\b/g,
+        // This is a lyrics line - highlight only legitimate chords within the text
+        let formattedLine = line;
+        
+        // Highlight major chords with extensions
+        formattedLine = formattedLine.replace(
+          /\b(DO#?|RE#?|MI|FA#?|SOL#?|LA#?|SI)([m]?[0-9]*|add[0-9]+|sus[0-9]*|maj[0-9]*|dim|M)?([0-9]*)\b/g,
+          (match) => {
+            return `<span class="text-blue-600 font-semibold">${match}</span>`;
+          }
+        );
+        
+        // Highlight clear minor chords
+        formattedLine = formattedLine.replace(
+          /\b(mim|sim|rem|lam|dom|fam|solm)\b/g,
           (match) => {
             return `<span class="text-blue-600 font-semibold">${match}</span>`;
           }
@@ -143,7 +169,7 @@ const SongRepertoire = () => {
         return (
           <div 
             key={index} 
-            className="text-gray-700 mb-1 leading-relaxed whitespace-pre"
+            className="text-black mb-1 leading-relaxed whitespace-pre"
             dangerouslySetInnerHTML={{ __html: formattedLine || '&nbsp;' }}
           />
         );
