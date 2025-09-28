@@ -15,7 +15,7 @@ const Hero = () => {
             <motion.h1 
               className="text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 bg-clip-text text-transparent leading-tight mb-6"
             >
-              CAZ Atocha
+              CAZ
             </motion.h1>
             
             <motion.h2 
@@ -34,7 +34,7 @@ const Hero = () => {
             <motion.p 
               className="text-lg text-gray-600 leading-relaxed mb-8 max-w-2xl mx-auto"
             >
-              Bienvenido al repertorio musical de CAZ Atocha. Aquí encontrarás una colección completa de canciones con acordes transportables.
+              Bienvenido. Aquí encontrarás una colección de canciones con acordes transportables.
             </motion.p>
 
             <motion.button
